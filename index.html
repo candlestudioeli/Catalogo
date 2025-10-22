@@ -92,6 +92,17 @@
             color: #555;
             padding: 5px 0;
         }
+    /* ************************************************* */
+        /* *************** STILE PER IL FOOTER *************** */
+        /* ************************************************* */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.9em;
+            margin-top: auto; /* Spinge il footer in fondo se c'è spazio */
+        }
     </style>
 </head>
 <body>
@@ -104,6 +115,11 @@
 
     <main class="image-gallery">
 
+        <figure>
+            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 13.19.36 (1).jpeg" alt="Descrizione Immagine 1">
+        <figcaption>Alberello 5€</figcaption>
+        </figure>
+        
         <figure>
             <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.13.jpeg" alt="Descrizione Immagine 1">
         <figcaption>Alberello 5€</figcaption>
@@ -491,7 +507,15 @@
             <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.16 (9).jpeg" alt="Descrizione Immagine 2">
             <figcaption>Un secondo scatto di prova per la galleria.</figcaption>
         </figure>
-        </main>
+     </main>
 
+    <footer>
+<span>© <span id="year"></span> Candle Studio Eli </span>
+</footer>
+</div>
+</main>
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
