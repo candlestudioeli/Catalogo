@@ -13,22 +13,29 @@
             background-color: #FFFFFF; 
         }
 
-        /* Stile per l'Header */
+        /* Stile per l'Header - MODIFICATO PER CENTRARE IL LOGO */
         header {
             background-color: #FFFFFF;
-            color: balck;
+            color: black;
             padding: 10px 20px;
-            display: flex;
-            align-items: center;
+            
+            /* Abilita Flexbox */
+            display: flex; 
+            /* Allinea orizzontalmente: CENTRA IL CONTENUTO */
+            justify-content: center; 
+            /* Allinea verticalmente (se c'è spazio) */
+            align-items: center; 
+            
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-/* Stile per il Logo nell'Header */
+        /* Stile per il Logo nell'Header */
         .logo-container img {
-            height: 50px; /* Altezza del logo */
+            height: 80px; /* Aumento l'altezza per renderlo più evidente al centro */
             width: auto;
-            align-items: center;
-            margin-right: 20px;
+            /* Rimuoviamo il margine che era per separare il logo dal titolo */
+            margin: 0; 
+            display: block;
         }
 
         /* Contenitore principale delle Immagini */
