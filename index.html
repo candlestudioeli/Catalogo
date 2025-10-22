@@ -23,7 +23,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Stile per il Logo nell'Header */
+/* Stile per il Logo nell'Header */
         .logo-container img {
             height: 50px; /* Altezza del logo */
             width: auto;
@@ -35,49 +35,69 @@
             padding: 20px;
             display: flex;
             flex-wrap: wrap; 
-            gap: 20px; /* Spazio tra le immagini */
-            justify-content: center; /* Centra le immagini orizzontalmente */
+            gap: 20px; /* Spazio tra gli elementi */
+            justify-content: center; /* Centra gli elementi orizzontalmente */
         }
 
-        /* Stile per le singole Immagini */
-        .image-gallery img {
-            width: 100%; 
-            max-width: 300px; /* Dimensione massima per singola immagine */
-            height: auto;
+        /* Contenitore Figure (Immagine + Didascalia) */
+        figure {
+            margin: 0; /* Rimuove il margine predefinito */
+            max-width: 300px; /* Dimensione massima del blocco figura */
+            background-color: #fff;
+            padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
+            text-align: center; /* Centra il testo della didascalia */
         }
-
-        .image-gallery img:hover {
+        
+        figure:hover {
             transform: scale(1.05);
             border-color: #007bff;
+        }
+
+        /* Stile per le singole Immagini all'interno della figura */
+        figure img {
+            width: 100%; 
+            height: auto;
+            display: block; /* Rimuove lo spazio extra sotto l'immagine */
+            border-radius: 3px;
+            margin-bottom: 10px; /* Spazio tra immagine e didascalia */
+        }
+
+        /* Stile per la Didascalia */
+        figcaption {
+            font-size: 0.9em;
+            color: #555;
+            padding: 5px 0;
         }
     </style>
 </head>
 <body>
-
-    <header>
+   <header>
         <div class="logo-container">
             <img src="Gemini_Generated_Image_df10mzdf10mzdf10.png" alt="Logo Aziendale">
-        </div>
+       </div>
         <h1>Foto</h1>
     </header>
 
     <main class="image-gallery">
 
-        <div class="image-item">
+        <figure>
             <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.13 (1).jpeg" alt="Descrizione Immagine 1">
-        </div>
+        <figcaption>Alberello 5€</figcaption>
+        </figure>
         
-        <div class="image-item">
+        <figure>
             <img src="nome-immagine-02.png" alt="Descrizione Immagine 2">
-        </div>
+            <figcaption>Un secondo scatto di prova per la galleria.</figcaption>
+        </figure>
         
-        <div class="image-item">
+        <figure>
             <img src="nome-immagine-03.gif" alt="Descrizione Immagine 3">
-        </div>
+            <figcaption>Il nostro logo in versione animata.</figcaption>
+        </figure>
         
         </main>
 
