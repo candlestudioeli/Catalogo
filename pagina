@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina con Header e Immagini</title>
+    <style>
+        /* CSS per lo stile di base */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Stile per l'Header */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Stile per il Logo nell'Header */
+        .logo-container img {
+            height: 50px; /* Altezza del logo */
+            width: auto;
+            margin-right: 20px;
+        }
+
+        /* Contenitore principale delle Immagini */
+        .image-gallery {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap; /* Le immagini vanno a capo se lo spazio non basta */
+            gap: 20px; /* Spazio tra le immagini */
+            justify-content: center; /* Centra le immagini orizzontalmente */
+        }
+
+        /* Stile per le singole Immagini */
+        .image-gallery img {
+            width: 100%; /* Larghezza massima */
+            max-width: 300px; /* Dimensione massima per singola immagine */
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Effetto al passaggio del mouse */
+        .image-gallery img:hover {
+            transform: scale(1.03);
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo Aziendale">
+        </div>
+        <h1>La Mia Galleria di Immagini</h1>
+    </header>
+
+    <main class="image-gallery">
+
+        <div class="image-item">
+            <img src="immagine1.jpg" alt="Descrizione Immagine 1">
+        </div>
+
+        <div class="image-item">
+            <img src="immagine2.jpg" alt="Descrizione Immagine 2">
+        </div>
+
+        <div class="image-item">
+            <img src="immagine3.jpg" alt="Descrizione Immagine 3">
+        </div>
+
+        <div class="image-item">
+            <img src="https://via.placeholder.com/300x200?text=Immagine+4" alt="Immagine di esempio">
+        </div>
+        <div class="image-item">
+            <img src="https://via.placeholder.com/300x400?text=Immagine+5" alt="Immagine di esempio">
+        </div>
+        <div class="image-item">
+            <img src="https://via.placeholder.com/250x250?text=Immagine+6" alt="Immagine di esempio">
+        </div>
+        
+
+    </main>
+
+</body>
+</html>
