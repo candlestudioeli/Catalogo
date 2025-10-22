@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candle Studio Eli Catalogo</title>
+    <title>Galleria di Immagini da Cartella</title>
     <style>
         /* CSS per lo stile di base */
         body {
             font-family: sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #FFFFFF;
+            background-color: #f4f4f4; /* Grigio molto chiaro */
         }
 
         /* Stile per l'Header */
         header {
-            background-color: #FFFFFF;
-            color: black;
+            background-color: #333;
+            color: white;
             padding: 10px 20px;
             display: flex;
             align-items: center;
@@ -27,7 +27,6 @@
         .logo-container img {
             height: 50px; /* Altezza del logo */
             width: auto;
-            align-items: center;
             margin-right: 20px;
         }
 
@@ -35,14 +34,14 @@
         .image-gallery {
             padding: 20px;
             display: flex;
-            flex-wrap: wrap; /* Le immagini vanno a capo se lo spazio non basta */
+            flex-wrap: wrap; 
             gap: 20px; /* Spazio tra le immagini */
             justify-content: center; /* Centra le immagini orizzontalmente */
         }
 
         /* Stile per le singole Immagini */
         .image-gallery img {
-            width: 100%; /* Larghezza massima */
+            width: 100%; 
             max-width: 300px; /* Dimensione massima per singola immagine */
             height: auto;
             border: 1px solid #ddd;
@@ -51,9 +50,8 @@
             transition: transform 0.3s ease-in-out;
         }
 
-        /* Effetto al passaggio del mouse */
         .image-gallery img:hover {
-            transform: scale(1.03);
+            transform: scale(1.05);
             border-color: #007bff;
         }
     </style>
@@ -62,37 +60,26 @@
 
     <header>
         <div class="logo-container">
-            <img src="Gemini_Generated_Image_df10mzdf10mzdf10.png" alt="Logo Aziendale">
+            <img src="logo.png" alt="Logo Aziendale">
         </div>
-        <h1>La Mia Galleria di Immagini</h1>
+        <h1>Galleria Immagini della Cartella</h1>
     </header>
 
     <main class="image-gallery">
 
         <div class="image-item">
-            <img src="immagine1.jpg" alt="Descrizione Immagine 1">
-        </div>
-
-        <div class="image-item">
-            <img src="immagine2.jpg" alt="Descrizione Immagine 2">
-        </div>
-
-        <div class="image-item">
-            <img src="immagine3.jpg" alt="Descrizione Immagine 3">
-        </div>
-
-        <div class="image-item">
-            <img src="https://via.placeholder.com/300x200?text=Immagine+4" alt="Immagine di esempio">
-        </div>
-        <div class="image-item">
-            <img src="https://via.placeholder.com/300x400?text=Immagine+5" alt="Immagine di esempio">
-        </div>
-        <div class="image-item">
-            <img src="https://via.placeholder.com/250x250?text=Immagine+6" alt="Immagine di esempio">
+            <img src="nome-immagine-01.jpg" alt="Descrizione Immagine 1">
         </div>
         
-
-    </main>
+        <div class="image-item">
+            <img src="nome-immagine-02.png" alt="Descrizione Immagine 2">
+        </div>
+        
+        <div class="image-item">
+            <img src="nome-immagine-03.gif" alt="Descrizione Immagine 3">
+        </div>
+        
+        </main>
 
 </body>
 </html>
