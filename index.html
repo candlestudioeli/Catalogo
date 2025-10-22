@@ -39,17 +39,18 @@
             justify-content: center; /* Centra gli elementi orizzontalmente */
         }
 
-        /* Contenitore Figure (Immagine + Didascalia) */
+       /* Contenitore Figure (Immagine + Didascalia) */
         figure {
-            margin: 0; /* Rimuove il margine predefinito */
-            max-width: 300px; /* Dimensione massima del blocco figura */
+            margin: 0;
+            /* La larghezza della figura è definita dalla larghezza dell'immagine + padding */
+            width: 300px; /* **Larghezza del contenitore adattata all'immagine** */
             background-color: #fff;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
-            text-align: center; /* Centra il testo della didascalia */
+            text-align: center;
         }
         
         figure:hover {
@@ -57,16 +58,27 @@
             border-color: #007bff;
         }
 
-        /* Stile per le singole Immagini all'interno della figura */
+        /* ************************************************* */
+        /* ******** STILE CRUCIALE PER L'UNIFORMITÀ ********* */
+        /* ************************************************* */
         figure img {
-            width: 100%; 
-            height: auto;
-            display: block; /* Rimuove lo spazio extra sotto l'immagine */
+            /* Imposta larghezza e altezza FISSE per tutte le immagini */
+            width: 300px;
+            height: 200px; 
+            
+            /* object-fit: cover garantisce che l'immagine riempia lo spazio,
+               ritagliando le parti in eccesso se le proporzioni non corrispondono.
+               Usa 'contain' se preferisci che l'immagine sia visibile interamente,
+               lasciando spazi vuoti se le proporzioni non corrispondono. */
+            object-fit: cover; 
+            
+            display: block; 
             border-radius: 3px;
-            margin-bottom: 10px; /* Spazio tra immagine e didascalia */
+            margin-bottom: 10px;
         }
+        /* ************************************************* */
 
-        /* Stile per la Didascalia */
+        /* Stile per la Didascalia (invariato) */
         figcaption {
             font-size: 0.9em;
             color: #555;
