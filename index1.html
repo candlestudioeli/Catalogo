@@ -12,7 +12,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #FFFFFF;
             color: #333;
         }
 
@@ -34,7 +34,7 @@
 
         /* Stile per il Logo nell'Header */
         .logo-container img {
-            height: 80px; /* Aumento l'altezza per renderlo più evidente al centro */
+            height: 60px; /* Aumento l'altezza per renderlo più evidente al centro */
             width: auto;
             /* Rimuoviamo il margine che era per separare il logo dal titolo */
             margin: 0; 
@@ -42,12 +42,12 @@
         }
 
         .footer {
-            font-size: 0.8em;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            padding-top: 10px;
-            padding-bottom: 10px;
+            background-color: #FFFFFF;
+            color: black;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.9em;
+            margin-top: auto; /* Spinge il footer in fondo se c'è spazio */
         }
 
         /* Contenitore Carosello */
@@ -55,7 +55,7 @@
             position: relative;
             max-width: 90vw; 
             height: 80vh;    /* Altezza del carosello */
-            margin: 70px auto 60px; /* Spazio per header, footer e pulsante autoplay */
+            margin: 80px auto 70px; /* Spazio per header, footer e pulsante autoplay */
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             border-radius: 8px;
@@ -149,7 +149,7 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; <span id="currentYear"></span> Il Tuo Nome. Tutti i diritti riservati.</p>
+        <p>&copy; <span id="currentYear"></span> Candle Studio Eli </p>
     </footer>
 
     <script>
@@ -276,7 +276,7 @@
         let currentIndex = 0;
         let autoplayInterval;
         let isPlaying = true;
-        const autoplayDelay = 3000; // 3 secondi per slide
+        const autoplayDelay = 5000; // 3 secondi per slide
 
         // 1. Caricamento Immagini
         function loadImages() {
