@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carosello Immagini GitHub (Immagini Complete)</title>
+    <title>Carosello Immagini</title>
     
     <style>
         /* ------------------------------------- */
@@ -16,27 +16,29 @@
             color: #333;
         }
 
-        /* Header e Footer */
-        .header, .footer {
-            padding: 15px 20px;
-            background-color: #333;
-            color: white;
-            text-align: center;
-        }
-
-        .header {
-            border-bottom: 1px solid #FFFFFF;
-                        /* Abilita Flexbox */
+        /* Stile per l'Header - MODIFICATO PER CENTRARE IL LOGO */
+        header {
+            background-color: #FFFFFF;
+            color: black;
+            padding: 10px 20px;
+            
+            /* Abilita Flexbox */
             display: flex; 
             /* Allinea orizzontalmente: CENTRA IL CONTENUTO */
             justify-content: center; 
             /* Allinea verticalmente (se c'è spazio) */
             align-items: center; 
+            
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .logo h1 {
-            margin: 0;
-            font-size: 1.5em;
+        /* Stile per il Logo nell'Header */
+        .logo-container img {
+            height: 80px; /* Aumento l'altezza per renderlo più evidente al centro */
+            width: auto;
+            /* Rimuoviamo il margine che era per separare il logo dal titolo */
+            margin: 0; 
+            display: block;
         }
 
         .footer {
