@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carosello Immagini GitHub (Riempimento Totale)</title>
+    <title>Carosello Immagini GitHub (Immagini Complete)</title>
     
     <style>
         /* ------------------------------------- */
@@ -46,12 +46,12 @@
         .carousel-container {
             position: relative;
             max-width: 90vw; 
-            height: 80vh;    /* Aumentato l'altezza per far risaltare il riempimento */
-            margin: 70px auto 60px; /* Spazio per header e footer */
+            height: 80vh;    /* Altezza del carosello */
+            margin: 70px auto 60px; /* Spazio per header, footer e pulsante autoplay */
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             border-radius: 8px;
-            background-color: #000; /* Sfondo nero per le transizioni */
+            background-color: #000; /* Sfondo nero per le zone "vuote" */
         }
 
         /* Traccia delle Immagini */
@@ -61,21 +61,21 @@
             height: 100%;
         }
 
-        /* Stile Immagine (Riempimento Totale) */
+        /* Stile Immagine (Tutta Visibile) */
         .carousel-slide {
             min-width: 100%; 
             height: 100%;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* Centra orizzontalmente */
+            align-items: center;     /* Centra verticalmente */
             flex-shrink: 0; 
         }
 
         .carousel-slide img {
-            /* NUOVO: Riempie completamente il carosello, tagliando i bordi se necessario */
+            /* NUOVO: L'immagine è scalata per essere interamente visibile */
             width: 100%;
             height: 100%;
-            object-fit: cover; 
+            object-fit: contain; 
             display: block;
         }
 
@@ -110,13 +110,11 @@
 
         /* Pulsante Stop/Play (Sempre Visibile) */
         .toggle-btn {
-            /* Posiziona il pulsante Stop/Play in alto a destra, SEMPRE visibile */
             top: 10px;
             right: 10px;
             padding: 8px 12px;
             font-size: 18px;
             border-radius: 4px;
-            /* Rende il pulsante più visibile */
             background-color: #007bff; 
             opacity: 1;
         }
@@ -270,7 +268,7 @@
         let currentIndex = 0;
         let autoplayInterval;
         let isPlaying = true;
-        const autoplayDelay = 5000; // 5 secondi per slide
+        const autoplayDelay = 3000; // 3 secondi per slide
 
         // 1. Caricamento Immagini
         function loadImages() {
@@ -297,6 +295,8 @@
 
         // 2. Funzione per spostare il carosello
         function moveToSlide(index) {
+            if (imageFiles.length === 0) return; // Non fare nulla se non ci sono immagini
+            
             // Ciclo infinito
             if (index >= imageFiles.length) {
                 currentIndex = 0;
@@ -313,7 +313,7 @@
 
         // 3. Controllo Autoplay
         function startAutoplay() {
-            if (imageFiles.length <= 1) return;
+            if (imageFiles.length <= 1) return; 
             isPlaying = true;
             toggleIcon.innerHTML = '&#9616;&#9616;'; // Icona Pausa
             autoplayInterval = setInterval(() => {
