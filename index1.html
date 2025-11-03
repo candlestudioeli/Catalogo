@@ -3,468 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galleria Scorrevole</title>
+    <title>Slider Automatico e Manuale</title>
+    
     <style>
-        /* Stili CSS */
-
-        /* Contenitore principale dello scorrimento */
-        .gallery-container {
-            /* Permette lo scorrimento orizzontale */
-            overflow-x: scroll;
-            /* Nasconde la barra di scorrimento standard (opzionale) */
-            /* Se vuoi una barra di scorrimento visibile, puoi rimuovere o commentare le righe seguenti */
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-            /* Per nascondere la barra su Chrome, Safari e Opera */
-            /* .gallery-container::-webkit-scrollbar { display: none; } */
-
-            /* Larghezza del contenitore visibile sulla pagina */
-            width: 90%; 
-            /* Centra il contenitore sulla pagina */
-            margin: 50px auto; 
-            /* Aggiunge un bordo per visibilità */
-            border: 2px solid #333; 
-            /* Per far apparire le immagini affiancate correttamente */
-            white-space: nowrap; 
-            /* Aggiunge un po' di spazio interno */
-            padding: 10px 0; 
-            /* Opzionale: permette lo "snap" per fermarsi precisamente su ogni immagine */
-            scroll-snap-type: x mandatory;
+        /* ================= */
+        /* === 1. CSS base per lo Slider === */
+        /* ================= */
+        
+        .slider-container {
+            /* Imposta l'area visibile */
+            width: 80%;
+            max-width: 700px;
+            margin: 50px auto;
+            position: relative;
+            overflow: hidden; /* Nasconde le immagini fuori campo */
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        /* Stile per ogni singola immagine */
-        .gallery-container img {
-            /* L'immagine occupa sempre il 100% dell'altezza del contenitore */
-            height: 200px; 
-            /* La larghezza si adatta per mantenere le proporzioni */
-            width: auto; 
-            /* Mantiene le immagini affiancate */
-            display: inline-block; 
-            /* Aggiunge un po' di spazio tra le immagini */
-            margin-right: 10px; 
-            /* Opzionale: definisce dove fermarsi durante lo snap */
-            scroll-snap-align: start;
+        .slide-track {
+            /* Il contenitore di tutte le slide, lungo abbastanza per contenerle */
+            display: flex;
+            transition: transform 0.5s ease-in-out; /* Animazione di scorrimento */
         }
 
-        /* Rimuovi il margine dall'ultima immagine */
-        .gallery-container img:last-child {
-            margin-right: 0;
+        .slide {
+            /* Ogni slide occupa il 100% della larghezza del contenitore */
+            min-width: 100%; 
+            box-sizing: border-box; 
+            text-align: center;
         }
 
+        .slide img {
+            /* L'immagine occupa tutta la larghezza dello slide */
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .slide figcaption {
+            /* Stile per la didascalia (nome immagine) */
+            padding: 10px;
+            background-color: #f8f8f8;
+            color: #333;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        /* =============================== */
+        /* === 2. CSS per la Navigazione === */
+        /* =============================== */
+
+        .nav-btn {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.3s ease;
+            user-select: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            z-index: 10;
+        }
+
+        .prev {
+            left: 0;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Galleria di Immagini a Scorrimento Orizzontale</h1>
-    </header>
+    <div class="slider-container" id="imageSlider">
+        <button class="nav-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+        
+        <div class="slide-track">
+            
+            <figure class="slide">
+                <img src="https://via.placeholder.com/700x350/FF5733/FFFFFF?text=IMMAGINE+1" alt="Descrizione Immagine 1">
+                <figcaption>Paesaggio Montano</figcaption>
+            </figure>
 
-    <div class="gallery-container">
- <figure> 
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 13.19.36 (1).jpeg" alt="Bomboniere">
-        <figcaption>Bomboniera Leoncino 10€</figcaption>
-        </figure>
-                <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (4).jpeg" alt="Bomboniere">
-            <figcaption>Piccolo Miracolo 7€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (5).jpeg" alt="Bomboniere">
-            <figcaption>Margherita a Cono 6€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (25).jpeg" alt="Bomboniere">
-            <figcaption>Teddy con Cuore 7€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.13.jpeg" alt="Autunno">
-        <figcaption>Tris di Zucche 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (34).jpeg" alt="Autunno">
-        <figcaption>Zucca e Magia 15€</figcaption>
-        </figure>      
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (2).jpeg" alt="Autunno">
-            <figcaption>Incanto d'Autunno 25€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (27).jpeg" alt="Autunno">
-            <figcaption>Zucca 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (37).jpeg" alt="Autunno">
-            <figcaption>Zucca Incantata 12€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (4).jpeg" alt="Autunno">
-            <figcaption>Riccio 7€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (22).jpeg" alt="Autunno">
-            <figcaption>Pumpkin Spice 30€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (13).jpeg" alt="Tart">
-            <figcaption>Intreccio Sposi 4€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (14).jpeg" alt="Tart">
-            <figcaption>Cuore Astratto 5€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (19).jpeg" alt="Tart">
-            <figcaption>Freschezza Mattutina 7€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (20).jpeg" alt="Tart">
-            <figcaption>Lettere in Cera 0,70€</figcaption>
-        </figure>        
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (1).jpeg" alt="Candele Contenitore">
-            <figcaption>Fiore di Cristallo 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (18).jpeg" alt="Candele Contenitore">
-            <figcaption>Fiore di Cristallo con Coperchio 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (32).jpeg" alt="Candele Contenitore">
-            <figcaption>Leo 18€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (33).jpeg" alt="Candele Contenitore">
-            <figcaption>Tulipani in Vaso 20€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (35).jpeg" alt="Candele Contenitore">
-            <figcaption>Fiore Incantato 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (36).jpeg" alt="Candele Contenitore">
-            <figcaption>Fiore di Cristallo Doppio 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (1).jpeg" alt="Candele Contenitore">
-            <figcaption>Gesto d'Amore 18€</figcaption>
-        </figure>     
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (18).jpeg" alt="Candele Contenitore">
-            <figcaption>Petali di Luce 18€</figcaption>
-        </figure>        
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15.jpeg" alt="Bouquet">
-        <figcaption>Sospiro di Rosa 13€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (2).jpeg" alt="Bouquet">
-            <figcaption>Sospiro di Peonia 15€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (3).jpeg" alt="Bouquet">
-            <figcaption>Campo di Tulipani 15€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (38).jpeg" alt="Bouquet">
-            <figcaption>Bouquet Cerimonia 40€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (39).jpeg" alt="Bouquet">
-            <figcaption>Bouquet Large 50€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (15).jpeg" alt="Bouquet">
-            <figcaption>Mini Bouquet 18€</figcaption>
-        </figure>    
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (40).jpeg" alt="Bouquet">
-            <figcaption>Bouquet Large 50€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (41).jpeg" alt="Bouquet">
-            <figcaption>Bouquet Small 30€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (42).jpeg" alt="Bouquet">
-            <figcaption>Bouquet Medium 40€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.16.jpeg" alt="Bouquet">
-        <figcaption>Bouquet Medium 40€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.16 (1).jpeg" alt="Bouquet">
-            <figcaption>Bouquet Medium 40€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.16 (2).jpeg" alt="Bouquet">
-            <figcaption>Bouquet Girasoli/Margherite/Tulipani 35€</figcaption>
-        </figure>  
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.13 (3).jpeg" alt="Candele Profumate">
-            <figcaption>Leoncino 6€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.13 (4).jpeg" alt="Candele Profumate">
-            <figcaption>Teddy con Fiocco 7€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (3).jpeg" alt="Candele Profumate">
-            <figcaption>Margherita 4€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (7).jpeg" alt="Candele Profumate">
-            <figcaption>Fior di Cera 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (8).jpeg" alt="Candele Profumate">
-            <figcaption>Rosa Piccola 6€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (9).jpeg" alt="Candele Profumate">
-            <figcaption>Rosa Grande 8€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (10).jpeg" alt="Candele Profumate">
-            <figcaption>Sweet Dog 8€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (11).jpeg" alt="Candele Profumate">
-            <figcaption>Zampa 5€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (12).jpeg" alt="Candele Profumate">
-            <figcaption>Vortice 15€</figcaption>
-        </figure>        
-         <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (13).jpeg" alt="Candele Profumate">
-            <figcaption>Rosa a Cuore 5€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (14).jpeg" alt="Candele Profumate">
-            <figcaption>Petali d'Amore 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (15).jpeg" alt="Candele Profumate">
-            <figcaption>Tulipano 5€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (16).jpeg" alt="Candele Profumate">
-            <figcaption>Farfalla 3,50€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (17).jpeg" alt="Candele Profumate">
-            <figcaption>Elefantino 7€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (21).jpeg" alt="Candele Profumate">
-            <figcaption>Gomitolo 6€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (23).jpeg" alt="Candele Profumate">
-            <figcaption>Dolce Incanto 20€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (25).jpeg" alt="Candele Profumate">
-            <figcaption>Intreccio di Luce 35€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (26).jpeg" alt="Candele Profumate">
-            <figcaption>Cuore con Fiocco 4€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (27).jpeg" alt="Candele Profumate">
-            <figcaption>Coppia Sposi 13€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (28).jpeg" alt="Candele Profumate">
-            <figcaption>Orsetto Baby 4€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (29).jpeg" alt="Candele Profumate">
-            <figcaption>Teddy con Peluche 7€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (30).jpeg" alt="Candele Profumate">
-            <figcaption>Orsetto 5€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (31).jpeg" alt="Candele Profumate">
-            <figcaption>Orsi Gemelli 6€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (32).jpeg" alt="Candele Profumate">
-            <figcaption>Dea 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (33).jpeg" alt="Candele Profumate">
-            <figcaption>Dea Bendata 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (34).jpeg" alt="Candele Profumate">
-            <figcaption>Girasole 4€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (35).jpeg" alt="Candele Profumate">
-            <figcaption>Dolce Aura 50€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (36).jpeg" alt="Candele Profumate">
-            <figcaption>Gufo 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (37).jpeg" alt="Candele Profumate">
-            <figcaption>Gufetto 5€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.16 (3).jpeg" alt="Candele Profumate">
-            <figcaption>Bubble 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.16 (4).jpeg" alt="Candele Profumate">
-            <figcaption>Bambina con Cuore 6€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.16 (5).jpeg" alt="Candele Profumate">
-            <figcaption>Princess 7€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.16 (6).jpeg" alt="Candele Profumate">
-            <figcaption>Bubble Mini 5€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.16 (7).jpeg" alt="Candele Profumate">
-            <figcaption>Bubble a Cuori 15€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.16 (8).jpeg" alt="Candele Profumate">
-            <figcaption>Home 15€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.16 (9).jpeg" alt="Candele Profumate">
-            <figcaption>Fiori di Vite 15€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14.jpeg" alt="Natale">
-            <figcaption>Albero 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.13 (1).jpeg" alt="Natale">
-            <figcaption>Alberello Natalizio 5€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.13 (2).jpeg" alt="Natale">
-            <figcaption>Palla di Natale 8€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (24).jpeg" alt="Natale">
-            <figcaption>Soldatino Reale 10€</figcaption>
-        </figure>    
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (5).jpeg" alt="Natale">
-            <figcaption>Presepe con Capanna 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (6).jpeg" alt="Natale">
-            <figcaption>Stella Alpina 4€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (7).jpeg" alt="Natale">
-            <figcaption>Santa Gift 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (8).jpeg" alt="Natale">
-            <figcaption>Albero di Natale con Palline 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (9).jpeg" alt="Natale">
-            <figcaption>Pupazzo di Neve 8€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (10).jpeg" alt="Natale">
-            <figcaption>Scultura Presepe 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (11).jpeg" alt="Natale">
-            <figcaption>Sfera Babbo Natale 13€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (12).jpeg" alt="Natale">
-            <figcaption>Sfera Albero di Natale 13€</figcaption>
-        </figure>
-           <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (16).jpeg" alt="Natale">
-            <figcaption>Cervo 3D 15€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (17).jpeg" alt="Natale">
-            <figcaption>Albero di Natale Pino 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (19).jpeg" alt="Natale">
-            <figcaption>Cervo 3D 15€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (20).jpeg" alt="Natale">
-            <figcaption>Fiocco di Neve 6€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (21).jpeg" alt="Natale">
-            <figcaption>Gnomo con Miele 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (22).jpeg" alt="Natale">
-            <figcaption>Re Magi 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (23).jpeg" alt="Natale">
-            <figcaption>Guanto 7€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (24).jpeg" alt="Natale">
-            <figcaption>Gnomo con Cartello 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (26).jpeg" alt="Natale">
-            <figcaption>Albero Bolle Mini 5€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (28).jpeg" alt="Natale">
-            <figcaption>Sacco di Babbo Natale 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (29).jpeg" alt="Natale">
-            <figcaption>Omino di Marzapane 2€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (30).jpeg" alt="Natale">
-            <figcaption>Santa Candle 10€</figcaption>
-        </figure>
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (31).jpeg" alt="Natale">
-            <figcaption>Schiaccianoci 10€</figcaption>
-        </figure>  
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/IMG_4339.jpeg" alt="Natale">
-            <figcaption>Stella di Natale 12€</figcaption>
-        </figure>   
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/IMG_4340.jpeg" alt="Natale">
-            <figcaption>Coccole di Marzapane 12€</figcaption>
-        </figure>  
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/IMG_4347.jpeg" alt="Natale">
-            <figcaption>Incanto di Natale 15€</figcaption>
-        </figure> 
-        <figure>
-            <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/IMG_4348.jpeg" alt="Natale">
-            <figcaption>Nature 10€</figcaption>
-        </figure>  
-             </div>
+            <figure class="slide">
+                <img src="https://via.placeholder.com/700x350/33FF57/FFFFFF?text=IMMAGINE+2" alt="Descrizione Immagine 2">
+                <figcaption>Veduta Cittadina</figcaption>
+            </figure>
 
-    <footer>
-        <p>Scorri per vedere tutte le immagini!</p>
-    </footer>
+            <figure class="slide">
+                <img src="https://via.placeholder.com/700x350/3357FF/FFFFFF?text=IMMAGINE+3" alt="Descrizione Immagine 3">
+                <figcaption>Ritratti Artistici</figcaption>
+            </figure>
+            
+            </div>
 
-</body>
-</html>
+        <button class="nav-btn next" onclick="changeSlide(1)">&#10095;</button>
+
+    </div>
+
+    <script>
+        // =======================
+        // === 3. Codice JavaScript per l'Automatismo e il Controllo ===
+        // =======================
+
+        const track = document.querySelector('.slide-track');
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        // Intervallo di tempo (in millisecondi) per lo scorrimento automatico
+        const autoplayInterval = 4000; // 4 secondi
+        let slideInterval; 
+
+        // Funzione per mostrare lo slide corrente
+        function showSlide() {
+            // Calcola la distanza di scorrimento: indice corrente * 100%
+            const offset = -currentSlide * 100;
+            // Applica la trasformazione CSS per spostare la "pista"
+            track.style.transform = `translateX(${offset}%)`;
+        }
+
+        // Funzione per cambiare
