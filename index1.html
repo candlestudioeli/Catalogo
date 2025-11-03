@@ -46,7 +46,8 @@
             position: relative;
             max-width: 90vw; 
             height: 80vh;    /* Altezza del carosello */
-            margin: 80px auto 70px; /* Spazio per header, footer e pulsante autoplay */
+            /* MARGINE AGGIUSTATO: Mantenuto spazio per l'header, rimosso spazio per il footer */
+            margin: 80px auto 30px; 
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             border-radius: 8px;
@@ -258,7 +259,7 @@
         const nextBtn = document.getElementById('nextBtn');
         const toggleAutoplayBtn = document.getElementById('toggleAutoplay');
         const toggleIcon = document.getElementById('toggleIcon');
-        const currentYearSpan = document.getElementById('currentYear');
+        // RIMOZIONE: const currentYearSpan = document.getElementById('currentYear');
 
         let currentIndex = 0;
         let autoplayInterval;
@@ -343,7 +344,7 @@
 
         // 5. Inizializzazione
         document.addEventListener('DOMContentLoaded', () => {
-            currentYearSpan.textContent = new Date().getFullYear();
+            // RIMOZIONE: currentYearSpan.textContent = new Date().getFullYear();
             
             loadImages();
             if (imageFiles.length > 0) {
