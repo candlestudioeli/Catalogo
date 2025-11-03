@@ -6,7 +6,7 @@
     <title>Slider Prodotti - Candle Studio Eli</title>
     
     <style>
-        /* === CSS: Stile di Base e Header (dal tuo codice originale) === */
+        /* === CSS: Stile di Base e Header === */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -36,12 +36,12 @@
         /* =================================================== */
 
         .slider-container {
-            /* Imposta l'area visibile (centrata) */
+            /* Area visibile (centrata) */
             width: 90%;
-            max-width: 600px; /* Larghezza massima dello slider */
+            max-width: 600px;
             margin: 40px auto;
             position: relative;
-            overflow: hidden; /* Nasconde le slide non visibili */
+            overflow: hidden;
             border: 5px solid #007bff;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             border-radius: 8px;
@@ -60,12 +60,12 @@
             text-align: center;
         }
 
-        /* Figure all'interno dello slide */
+        /* Figura e Immagine */
         .slide figure {
             margin: 0;
             padding: 0;
             background-color: #fff;
-            width: 100%; /* La figura occupa l'intera slide */
+            width: 100%;
             border: none;
             box-shadow: none;
             border-radius: 0;
@@ -73,11 +73,6 @@
             flex-direction: column;
         }
         
-        .slide figure:hover {
-             transform: none; /* Disabilita l'effetto hover della vecchia galleria */
-        }
-
-        /* Immagine all'interno dello slide */
         .slide img {
             width: 100%;
             height: 450px; /* Altezza fissa */
@@ -86,7 +81,7 @@
             border-radius: 0;
         }
 
-        /* Didascalia all'interno dello slide */
+        /* Didascalia e Prezzo */
         .slide figcaption {
             padding: 15px;
             background-color: #007bff;
@@ -96,11 +91,10 @@
             text-align: center;
         }
         
-        /* Stile specifico per il prezzo nella didascalia */
         .slide figcaption strong {
             font-size: 1.1em;
             color: #FFEB3B; /* Giallo brillante per il prezzo */
-            margin-left: 10px; /* Spazio tra nome e prezzo */
+            margin-left: 10px;
         }
 
         /* === CSS: Navigazione Manuale (Frecce) === */
@@ -124,8 +118,29 @@
         .next { right: 0; border-radius: 4px 0 0 4px; }
 
         .nav-btn:hover { background-color: rgba(0, 0, 0, 0.7); }
+        
+        /* === CSS: Tasto Pausa === */
+        .pause-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 20;
+            padding: 8px 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
 
-        /* === CSS: Footer (dal tuo codice originale) === */
+        .pause-btn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* === CSS: Footer === */
         footer {
             background-color: #FFFFFF;
             color: #333;
@@ -148,13 +163,15 @@
         
         <div class="slider-container" id="imageSlider">
             
+            <button class="pause-btn" id="pauseButton" onclick="toggleAutoplay()">PAUSA</button>
+
             <button class="nav-btn prev" onclick="changeSlide(-1)">&#10094;</button>
             
             <div class="slide-track">
                 
                 <div class="slide">
                     <figure> 
-                        <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 13.19.36 (1).jpeg" alt="Bomboniera Leoncino">
+                        <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 13.19.36 (1).jpeg" alt="Bomboniere Leoncino">
                         <figcaption>Bomboniera Leoncino <strong>10€</strong></figcaption>
                     </figure>
                 </div>
@@ -194,6 +211,13 @@
                     </figure>
                 </div>
                 
+                <div class="slide">
+                    <figure>
+                        <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (2).jpeg" alt="Incanto d'Autunno">
+                        <figcaption>Incanto d'Autunno <strong>25€</strong></figcaption>
+                    </figure>
+                </div>
+                
                 </div>
 
             <button class="nav-btn next" onclick="changeSlide(1)">&#10095;</button>
@@ -206,43 +230,51 @@
     </footer>
 
     <script>
-        /* === JAVASCRIPT: Logica di Scorrimento (Autoplay e Manuale) === */
+        /* === JAVASCRIPT: Logica di Scorrimento (Autoplay 4s e Manuale) === */
 
         const track = document.querySelector('.slide-track');
-        // Seleziona tutti gli elementi con la classe .slide
-        const slides = document.querySelectorAll('.slide'); 
+        const slides = document.querySelectorAll('.slide');
+        const pauseButton = document.getElementById('pauseButton');
+        
         let currentSlide = 0;
         const slideCount = slides.length;
-        const autoplayInterval = 3000; // Autoplay ogni 3 secondi
+        
+        // Autoplay ogni 4 secondi (4000ms)
+        const autoplayInterval = 4000; 
+        
         let slideInterval; 
+        let isAutoplaying = true; // Stato iniziale: Autoplay attivo
 
-        // 1. Sposta il carosello
+        // 1. Funzione per spostare il carosello
         function showSlide() {
-            // Calcola lo spostamento orizzontale in base alla slide corrente
             const offset = -currentSlide * 100; 
             track.style.transform = `translateX(${offset}%)`;
         }
 
-        // 2. Cambia slide (usata da pulsanti e autoplay)
+        // 2. Funzione per cambiare slide (manuale)
         window.changeSlide = function(direction) {
-            pauseAutoplay(); // Metti in pausa prima di cambiare
+            // Metti in pausa l'autoplay temporaneamente per evitare salti
+            pauseAutoplay();
             
             currentSlide += direction;
 
-            // Logica di Loop: torna alla prima se superi l'ultima
+            // Logica di Loop: torna alla prima se superi l'ultima e viceversa
             if (currentSlide >= slideCount) {
                 currentSlide = 0;
             }
-            // Logica di Loop: torna all'ultima se vai prima della prima
             if (currentSlide < 0) {
                 currentSlide = slideCount - 1;
             }
 
             showSlide();
-            startAutoplay(); // Riavvia l'autoplay
+
+            // Dopo l'interazione manuale, riavvia l'autoplay solo se lo stato era 'attivo'
+            if (isAutoplaying) {
+                startAutoplay();
+            }
         };
 
-        // 3. Autoplay
+        // 3. Funzione per avviare l'Autoplay
         function startAutoplay() {
             if (!slideInterval) {
                 slideInterval = setInterval(() => {
@@ -251,17 +283,37 @@
             }
         }
 
+        // 4. Funzione per fermare l'Autoplay
         function pauseAutoplay() {
             clearInterval(slideInterval);
             slideInterval = null;
         }
+        
+        // 5. Funzione per Toggolare (Pausa/Riparti) tramite il pulsante
+        window.toggleAutoplay = function() {
+            if (isAutoplaying) {
+                pauseAutoplay();
+                isAutoplaying = false;
+                pauseButton.textContent = "RIPARTI";
+            } else {
+                startAutoplay();
+                isAutoplaying = true;
+                pauseButton.textContent = "PAUSA";
+            }
+        };
 
-        // 4. Avvio e interazione (pausa al mouse-hover)
+        // 6. Avvio e interazione (gestione mouse-hover)
         startAutoplay();
         
         const slider = document.getElementById('imageSlider');
+        // Pausa l'autoplay quando il mouse entra, solo se l'autoplay era attivo
         slider.addEventListener('mouseenter', pauseAutoplay);
-        slider.addEventListener('mouseleave', startAutoplay);
+        // Riavvia quando il mouse esce, solo se l'autoplay era attivo
+        slider.addEventListener('mouseleave', () => {
+            if (isAutoplaying) {
+                startAutoplay();
+            }
+        });
         
         // Inizializza l'anno nel footer
         document.getElementById('year').textContent = new Date().getFullYear();
