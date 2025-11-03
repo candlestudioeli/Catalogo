@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galleria Scorrevole</title>
+    <style>
+        /* Stili CSS */
+
+        /* Contenitore principale dello scorrimento */
+        .gallery-container {
+            /* Permette lo scorrimento orizzontale */
+            overflow-x: scroll;
+            /* Nasconde la barra di scorrimento standard (opzionale) */
+            /* Se vuoi una barra di scorrimento visibile, puoi rimuovere o commentare le righe seguenti */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            /* Per nascondere la barra su Chrome, Safari e Opera */
+            /* .gallery-container::-webkit-scrollbar { display: none; } */
+
+            /* Larghezza del contenitore visibile sulla pagina */
+            width: 90%; 
+            /* Centra il contenitore sulla pagina */
+            margin: 50px auto; 
+            /* Aggiunge un bordo per visibilità */
+            border: 2px solid #333; 
+            /* Per far apparire le immagini affiancate correttamente */
+            white-space: nowrap; 
+            /* Aggiunge un po' di spazio interno */
+            padding: 10px 0; 
+            /* Opzionale: permette lo "snap" per fermarsi precisamente su ogni immagine */
+            scroll-snap-type: x mandatory;
+        }
+
+        /* Stile per ogni singola immagine */
+        .gallery-container img {
+            /* L'immagine occupa sempre il 100% dell'altezza del contenitore */
+            height: 200px; 
+            /* La larghezza si adatta per mantenere le proporzioni */
+            width: auto; 
+            /* Mantiene le immagini affiancate */
+            display: inline-block; 
+            /* Aggiunge un po' di spazio tra le immagini */
+            margin-right: 10px; 
+            /* Opzionale: definisce dove fermarsi durante lo snap */
+            scroll-snap-align: start;
+        }
+
+        /* Rimuovi il margine dall'ultima immagine */
+        .gallery-container img:last-child {
+            margin-right: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Galleria di Immagini a Scorrimento Orizzontale</h1>
+    </header>
+
+    <div class="gallery-container">
+        <img src="immagine1.jpg" alt="Descrizione Immagine 1">
+        <img src="immagine2.jpg" alt="Descrizione Immagine 2">
+        <img src="immagine3.jpg" alt="Descrizione Immagine 3">
+        <img src="immagine4.jpg" alt="Descrizione Immagine 4">
+        <img src="immagine5.jpg" alt="Descrizione Immagine 5">
+        <img src="immagine6.jpg" alt="Descrizione Immagine 6">
+        <img src="immagine7.jpg" alt="Descrizione Immagine 7">
+        </div>
+
+    <footer>
+        <p>Scorri per vedere tutte le immagini!</p>
+    </footer>
+
+</body>
+</html>
