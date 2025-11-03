@@ -12,12 +12,15 @@
             margin: 0;
             padding: 0;
             color: #333;
-            /* NUOVO SFONDO CON GRADIENTE ACCATTIVANTE */
-            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); 
+            /* NUOVA IMMAGINE DI SFONDO PER L'INTERO BODY */
+            background-image: url('immagini/sfondo_candela.jpg'); /* INSERISCI QUI IL PERCORSO DELLA TUA IMMAGINE */
+            background-size: cover; /* L'immagine copre l'intera area */
+            background-position: center center; /* Centra l'immagine */
+            background-attachment: fixed; /* L'immagine rimane fissa durante lo scroll */
         }
 
         header {
-            background-color: #FFFFFF;
+            background-color: rgba(255, 255, 255, 0.85); /* Sfondo leggermente trasparente per farlo risaltare */
             padding: 10px 20px;
             display: flex;
             justify-content: center;
@@ -45,6 +48,7 @@
             border: 5px solid #007bff;
             box-shadow: 0 5px 20px rgba(0,0,0,0.3);
             border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.95); /* Sfondo quasi opaco per lo slider */
         }
 
         .slide-track {
@@ -61,7 +65,7 @@
         .slide figure {
             margin: 0;
             padding: 0;
-            background-color: #fff;
+            background-color: transparent; /* Sfondo della figura trasparente, usa quello dello slider */
             width: 100%;
             border: none;
             box-shadow: none;
@@ -70,10 +74,10 @@
             flex-direction: column;
         }
         
-        /* INGRANDIMENTO IMMAGINE */
+        /* INGRANDIMENTO IMMAGINE DELLO SLIDER */
         .slide img {
             width: 100%;
-            height: 550px; /* ALTEZZA AUMENTATA PER IMMAGINE PIÙ GRANDE */
+            height: 550px;
             object-fit: cover;
             display: block;
             border-radius: 0;
@@ -134,7 +138,7 @@
 
         /* === CSS: Footer === */
         footer {
-            background-color: #FFFFFF;
+            background-color: rgba(255, 255, 255, 0.85); /* Sfondo leggermente trasparente */
             color: #333;
             text-align: center;
             padding: 20px 0;
@@ -512,357 +516,4 @@
                 </div>
                 <div class="slide">
                     <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (31).jpeg" alt="Orsi Gemelli">
-                        <figcaption>Orsi Gemelli</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (32).jpeg" alt="Dea">
-                        <figcaption>Dea</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (33).jpeg" alt="Dea Bendata">
-                        <figcaption>Dea Bendata</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (34).jpeg" alt="Girasole">
-                        <figcaption>Girasole</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (35).jpeg" alt="Dolce Aura">
-                        <figcaption>Dolce Aura</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (36).jpeg" alt="Gufo">
-                        <figcaption>Gufo</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (37).jpeg" alt="Gufetto">
-                        <figcaption>Gufetto</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.16 (3).jpeg" alt="Bubble">
-                        <figcaption>Bubble</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.16 (4).jpeg" alt="Bambina con Cuore">
-                        <figcaption>Bambina con Cuore</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.16 (5).jpeg" alt="Princess">
-                        <figcaption>Princess</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.16 (6).jpeg" alt="Bubble Mini">
-                        <figcaption>Bubble Mini</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.16 (7).jpeg" alt="Bubble a Cuori">
-                        <figcaption>Bubble a Cuori</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.16 (8).jpeg" alt="Home">
-                        <figcaption>Home</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.16 (9).jpeg" alt="Fiori di Vite">
-                        <figcaption>Fiori di Vite</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14.jpeg" alt="Albero">
-                        <figcaption>Albero</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.13 (1).jpeg" alt="Alberello Natalizio">
-                        <figcaption>Alberello Natalizio</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.13 (2).jpeg" alt="Palla di Natale">
-                        <figcaption>Palla di Natale</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (24).jpeg" alt="Soldatino Reale">
-                        <figcaption>Soldatino Reale</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (5).jpeg" alt="Presepe con Capanna">
-                        <figcaption>Presepe con Capanna</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (6).jpeg" alt="Stella Alpina">
-                        <figcaption>Stella Alpina</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (7).jpeg" alt="Santa Gift">
-                        <figcaption>Santa Gift</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (8).jpeg" alt="Albero di Natale con Palline">
-                        <figcaption>Albero di Natale con Palline</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (9).jpeg" alt="Pupazzo di Neve">
-                        <figcaption>Pupazzo di Neve</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (10).jpeg" alt="Scultura Presepe">
-                        <figcaption>Scultura Presepe</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (11).jpeg" alt="Sfera Babbo Natale">
-                        <figcaption>Sfera Babbo Natale</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (12).jpeg" alt="Sfera Albero di Natale">
-                        <figcaption>Sfera Albero di Natale</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (16).jpeg" alt="Cervo 3D">
-                        <figcaption>Cervo 3D</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (17).jpeg" alt="Albero di Natale Pino">
-                        <figcaption>Albero di Natale Pino</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (19).jpeg" alt="Cervo 3D">
-                        <figcaption>Cervo 3D</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (20).jpeg" alt="Fiocco di Neve">
-                        <figcaption>Fiocco di Neve</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (21).jpeg" alt="Gnomo con Miele">
-                        <figcaption>Gnomo con Miele</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (22).jpeg" alt="Re Magi">
-                        <figcaption>Re Magi</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (23).jpeg" alt="Guanto">
-                        <figcaption>Guanto</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (24).jpeg" alt="Gnomo con Cartello">
-                        <figcaption>Gnomo con Cartello</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (26).jpeg" alt="Albero Bolle Mini">
-                        <figcaption>Albero Bolle Mini</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (28).jpeg" alt="Sacco di Babbo Natale">
-                        <figcaption>Sacco di Babbo Natale</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (29).jpeg" alt="Omino di Marzapane">
-                        <figcaption>Omino di Marzapane</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (30).jpeg" alt="Santa Candle">
-                        <figcaption>Santa Candle</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (31).jpeg" alt="Schiaccianoci">
-                        <figcaption>Schiaccianoci</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/IMG_4339.jpeg" alt="Stella di Natale">
-                        <figcaption>Stella di Natale</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/IMG_4340.jpeg" alt="Coccole di Marzapane">
-                        <figcaption>Coccole di Marzapane</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/IMG_4347.jpeg" alt="Incanto di Natale">
-                        <figcaption>Incanto di Natale</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/IMG_4348.jpeg" alt="Nature">
-                        <figcaption>Nature</figcaption>
-                    </figure>
-                </div>
-                
-            </div>
-
-            <button class="nav-btn next" onclick="changeSlide(1)">&#10095;</button>
-
-        </div>
-    </main>
-
-    <footer>
-        <span>© <span id="year"></span> Candle Studio Eli | Tutti i diritti riservati</span>
-    </footer>
-
-    <script>
-        /* === JAVASCRIPT: Logica di Scorrimento (Autoplay 4s e Manuale) === */
-
-        const track = document.querySelector('.slide-track');
-        const slides = document.querySelectorAll('.slide');
-        const pauseButton = document.getElementById('pauseButton');
-        
-        let currentSlide = 0;
-        const slideCount = slides.length;
-        
-        // Autoplay ogni 4 secondi (4000ms)
-        const autoplayInterval = 4000; 
-        
-        let slideInterval; 
-        let isAutoplaying = true;
-
-        // 1. Sposta il carosello
-        function showSlide() {
-            const offset = -currentSlide * 100; 
-            track.style.transform = `translateX(${offset}%)`;
-        }
-
-        // 2. Cambia slide (manuale)
-        window.changeSlide = function(direction) {
-            pauseAutoplay();
-            
-            currentSlide += direction;
-
-            if (currentSlide >= slideCount) {
-                currentSlide = 0;
-            }
-            if (currentSlide < 0) {
-                currentSlide = slideCount - 1;
-            }
-
-            showSlide();
-
-            if (isAutoplaying) {
-                startAutoplay();
-            }
-        };
-
-        // 3. Avvia l'Autoplay
-        function startAutoplay() {
-            if (!slideInterval) {
-                slideInterval = setInterval(() => {
-                    changeSlide(1); 
-                }, autoplayInterval);
-            }
-        }
-
-        // 4. Ferma l'Autoplay
-        function pauseAutoplay() {
-            clearInterval(slideInterval);
-            slideInterval = null;
-        }
-        
-        // 5. Toggla (Pausa/Riparti) tramite il pulsante
-        window.toggleAutoplay = function() {
-            if (isAutoplaying) {
-                pauseAutoplay();
-                isAutoplaying = false;
-                pauseButton.textContent = "RIPARTI";
-            } else {
-                startAutoplay();
-                isAutoplaying = true;
-                pauseButton.textContent = "PAUSA";
-            }
-        };
-
-        // 6. Avvio e gestione mouse-hover
-        startAutoplay();
-        
-        const slider = document.getElementById('imageSlider');
-        slider.addEventListener('mouseenter', pauseAutoplay);
-        slider.addEventListener('mouseleave', () => {
-            if (isAutoplaying) {
-                startAutoplay();
-            }
-        });
-        
-        // Inizializza l'anno nel footer
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
-</body>
-</html>
+                        <img
