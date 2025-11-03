@@ -3,136 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slider Automatico e Manuale</title>
+    <title>Slider Prodotti - Candle Studio Eli</title>
     
     <style>
-        /* ================= */
-        /* === 1. CSS base per lo Slider === */
-        /* ================= */
-        
+        /* === CSS: Stile di Base e Header (dal tuo codice originale) === */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #FFFFFF;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            height: 90px;
+            width: auto;
+            display: block;
+        }
+
+        /* =================================================== */
+        /* === CSS PER LO SLIDER (CAROUSEL) === */
+        /* =================================================== */
+
         .slider-container {
-            /* Imposta l'area visibile */
-            width: 80%;
-            max-width: 700px;
-            margin: 50px auto;
+            /* Imposta l'area visibile (centrata) */
+            width: 90%;
+            max-width: 600px; /* Larghezza massima dello slider */
+            margin: 40px auto;
             position: relative;
-            overflow: hidden; /* Nasconde le immagini fuori campo */
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden; /* Nasconde le slide non visibili */
+            border: 5px solid #007bff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-radius: 8px;
         }
 
         .slide-track {
-            /* Il contenitore di tutte le slide, lungo abbastanza per contenerle */
+            /* Contenitore di tutte le slide affiancate */
             display: flex;
-            transition: transform 0.5s ease-in-out; /* Animazione di scorrimento */
+            transition: transform 0.6s ease-in-out; /* Animazione di scorrimento */
         }
 
         .slide {
-            /* Ogni slide occupa il 100% della larghezza del contenitore */
+            /* Ogni slide occupa il 100% della larghezza visibile */
             min-width: 100%; 
             box-sizing: border-box; 
             text-align: center;
         }
 
+        /* Figure all'interno dello slide */
+        .slide figure {
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            width: 100%; /* La figura occupa l'intera slide */
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide figure:hover {
+             transform: none; /* Disabilita l'effetto hover della vecchia galleria */
+        }
+
+        /* Immagine all'interno dello slide */
         .slide img {
-            /* L'immagine occupa tutta la larghezza dello slide */
             width: 100%;
-            height: auto;
+            height: 450px; /* Altezza fissa */
+            object-fit: cover;
             display: block;
+            border-radius: 0;
         }
 
+        /* Didascalia all'interno dello slide */
         .slide figcaption {
-            /* Stile per la didascalia (nome immagine) */
-            padding: 10px;
-            background-color: #f8f8f8;
-            color: #333;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        /* Stile specifico per il prezzo nella didascalia */
+        .slide figcaption strong {
             font-size: 1.1em;
-            font-weight: bold;
+            color: #FFEB3B; /* Giallo brillante per il prezzo */
+            margin-left: 10px; /* Spazio tra nome e prezzo */
         }
 
-        /* =============================== */
-        /* === 2. CSS per la Navigazione === */
-        /* =============================== */
-
+        /* === CSS: Navigazione Manuale (Frecce) === */
         .nav-btn {
             cursor: pointer;
             position: absolute;
             top: 50%;
+            transform: translateY(-50%);
             width: auto;
-            padding: 16px;
-            margin-top: -22px;
+            padding: 10px 15px;
             color: white;
-            font-weight: bold;
-            font-size: 18px;
+            font-size: 24px;
             transition: 0.3s ease;
             user-select: none;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.4);
             border: none;
             z-index: 10;
         }
 
-        .prev {
-            left: 0;
-            border-radius: 0 3px 3px 0;
-        }
+        .prev { left: 0; border-radius: 0 4px 4px 0; }
+        .next { right: 0; border-radius: 4px 0 0 4px; }
 
-        .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
+        .nav-btn:hover { background-color: rgba(0, 0, 0, 0.7); }
 
-        .nav-btn:hover {
-            background-color: rgba(0, 0, 0, 0.8);
+        /* === CSS: Footer (dal tuo codice originale) === */
+        footer {
+            background-color: #FFFFFF;
+            color: #333;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9em;
+            border-top: 1px solid #ddd;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
+    <header>
+        <div class="logo-container">
+            <img src="Gemini_Generated_Image_df10mzdf10mzdf10.png" alt="Candle Studio Eli Logo">
+        </div>
+    </header>
 
-    <div class="slider-container" id="imageSlider">
-        <button class="nav-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+    <main>
         
-        <div class="slide-track">
+        <div class="slider-container" id="imageSlider">
             
-            <figure class="slide">
-                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 13.19.36 (1).jpeg" alt="Descrizione Immagine 1">
-                <figcaption>Paesaggio Montano</figcaption>
-            </figure>
-
-            <figure class="slide">
-                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (4).jpeg" alt="Descrizione Immagine 2">
-                <figcaption>Veduta Cittadina</figcaption>
-            </figure>
-
-            <figure class="slide">
-                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (5).jpeg" alt="Descrizione Immagine 3">
-                <figcaption>Ritratti Artistici</figcaption>
-            </figure>
+            <button class="nav-btn prev" onclick="changeSlide(-1)">&#10094;</button>
             
-            </div>
+            <div class="slide-track">
+                
+                <div class="slide">
+                    <figure> 
+                        <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 13.19.36 (1).jpeg" alt="Bomboniera Leoncino">
+                        <figcaption>Bomboniera Leoncino <strong>10€</strong></figcaption>
+                    </figure>
+                </div>
+                
+                <div class="slide">
+                    <figure>
+                        <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (4).jpeg" alt="Piccolo Miracolo Candela">
+                        <figcaption>Piccolo Miracolo <strong>7€</strong></figcaption>
+                    </figure>
+                </div>
+                
+                <div class="slide">
+                    <figure>
+                        <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (5).jpeg" alt="Margherita a Cono">
+                        <figcaption>Margherita a Cono <strong>6€</strong></figcaption>
+                    </figure>
+                </div>
 
-        <button class="nav-btn next" onclick="changeSlide(1)">&#10095;</button>
+                <div class="slide">
+                    <figure>
+                        <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (25).jpeg" alt="Teddy con Cuore Candela">
+                        <figcaption>Teddy con Cuore <strong>7€</strong></figcaption>
+                    </figure>
+                </div>
 
-    </div>
+                <div class="slide">
+                    <figure>
+                        <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.13.jpeg" alt="Tris di Zucche Autunnali">
+                        <figcaption>Tris di Zucche <strong>10€</strong></figcaption>
+                    </figure>
+                </div>
+
+                <div class="slide">
+                    <figure>
+                        <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (34).jpeg" alt="Zucca e Magia Candela">
+                        <figcaption>Zucca e Magia <strong>15€</strong></figcaption>
+                    </figure>
+                </div>
+                
+                </div>
+
+            <button class="nav-btn next" onclick="changeSlide(1)">&#10095;</button>
+
+        </div>
+        </main>
+
+    <footer>
+        <span>© <span id="year"></span> Candle Studio Eli | Tutti i diritti riservati</span>
+    </footer>
 
     <script>
-        // =======================
-        // === 3. Codice JavaScript per l'Automatismo e il Controllo ===
-        // =======================
+        /* === JAVASCRIPT: Logica di Scorrimento (Autoplay e Manuale) === */
 
         const track = document.querySelector('.slide-track');
-        const slides = document.querySelectorAll('.slide');
+        // Seleziona tutti gli elementi con la classe .slide
+        const slides = document.querySelectorAll('.slide'); 
         let currentSlide = 0;
         const slideCount = slides.length;
-        // Intervallo di tempo (in millisecondi) per lo scorrimento automatico
-        const autoplayInterval = 4000; // 4 secondi
+        const autoplayInterval = 3000; // Autoplay ogni 3 secondi
         let slideInterval; 
 
-        // Funzione per mostrare lo slide corrente
+        // 1. Sposta il carosello
         function showSlide() {
-            // Calcola la distanza di scorrimento: indice corrente * 100%
-            const offset = -currentSlide * 100;
-            // Applica la trasformazione CSS per spostare la "pista"
+            // Calcola lo spostamento orizzontale in base alla slide corrente
+            const offset = -currentSlide * 100; 
             track.style.transform = `translateX(${offset}%)`;
         }
 
-        // Funzione per cambiare
+        // 2. Cambia slide (usata da pulsanti e autoplay)
+        window.changeSlide = function(direction) {
+            pauseAutoplay(); // Metti in pausa prima di cambiare
+            
+            currentSlide += direction;
+
+            // Logica di Loop: torna alla prima se superi l'ultima
+            if (currentSlide >= slideCount) {
+                currentSlide = 0;
+            }
+            // Logica di Loop: torna all'ultima se vai prima della prima
+            if (currentSlide < 0) {
+                currentSlide = slideCount - 1;
+            }
+
+            showSlide();
+            startAutoplay(); // Riavvia l'autoplay
+        };
+
+        // 3. Autoplay
+        function startAutoplay() {
+            if (!slideInterval) {
+                slideInterval = setInterval(() => {
+                    changeSlide(1); 
+                }, autoplayInterval);
+            }
+        }
+
+        function pauseAutoplay() {
+            clearInterval(slideInterval);
+            slideInterval = null;
+        }
+
+        // 4. Avvio e interazione (pausa al mouse-hover)
+        startAutoplay();
+        
+        const slider = document.getElementById('imageSlider');
+        slider.addEventListener('mouseenter', pauseAutoplay);
+        slider.addEventListener('mouseleave', startAutoplay);
+        
+        // Inizializza l'anno nel footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
