@@ -6,13 +6,14 @@
     <title>Slider Prodotti - Candle Studio Eli</title>
     
     <style>
-        /* === CSS: Stile di Base e Header === */
+        /* === CSS: Sfondo e Stile di Base === */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
             color: #333;
+            /* NUOVO SFONDO CON GRADIENTE ACCATTIVANTE */
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); 
         }
 
         header {
@@ -22,7 +23,7 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .logo-container img {
@@ -36,31 +37,27 @@
         /* =================================================== */
 
         .slider-container {
-            /* Area visibile (centrata) */
             width: 90%;
-            max-width: 600px;
+            max-width: 650px; /* Larghezza massima leggermente aumentata */
             margin: 40px auto;
             position: relative;
             overflow: hidden;
             border: 5px solid #007bff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3); /* Ombra più intensa */
+            border-radius: 12px;
         }
 
         .slide-track {
-            /* Contenitore di tutte le slide affiancate */
             display: flex;
-            transition: transform 0.6s ease-in-out; /* Animazione di scorrimento */
+            transition: transform 0.6s ease-in-out;
         }
 
         .slide {
-            /* Ogni slide occupa il 100% della larghezza visibile */
             min-width: 100%; 
             box-sizing: border-box; 
             text-align: center;
         }
 
-        /* Figura e Immagine */
         .slide figure {
             margin: 0;
             padding: 0;
@@ -73,29 +70,26 @@
             flex-direction: column;
         }
         
+        /* INGRANDIMENTO IMMAGINE */
         .slide img {
             width: 100%;
-            height: 450px; /* Altezza fissa */
+            height: 550px; /* ALTEZZA AUMENTATA PER IMMAGINE PIÙ GRANDE */
             object-fit: cover;
             display: block;
             border-radius: 0;
         }
 
-        /* Didascalia e Prezzo */
+        /* Didascalia (Descrizione) */
         .slide figcaption {
-            padding: 15px;
+            padding: 18px;
             background-color: #007bff;
             color: white;
-            font-size: 1.2em;
+            font-size: 1.3em; /* Font leggermente più grande */
             font-weight: 500;
             text-align: center;
         }
         
-        .slide figcaption strong {
-            font-size: 1.1em;
-            color: #FFEB3B; /* Giallo brillante per il prezzo */
-            margin-left: 10px;
-        }
+        /* RIMOSSO LO STILE PER strong (prezzo) */
 
         /* === CSS: Navigazione Manuale (Frecce) === */
         .nav-btn {
@@ -104,9 +98,9 @@
             top: 50%;
             transform: translateY(-50%);
             width: auto;
-            padding: 10px 15px;
+            padding: 12px 18px;
             color: white;
-            font-size: 24px;
+            font-size: 26px;
             transition: 0.3s ease;
             user-select: none;
             background-color: rgba(0, 0, 0, 0.4);
@@ -172,49 +166,49 @@
                 <div class="slide">
                     <figure> 
                         <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 13.19.36 (1).jpeg" alt="Bomboniere Leoncino">
-                        <figcaption>Bomboniera Leoncino <strong>10€</strong></figcaption>
+                        <figcaption>Bomboniera Leoncino</figcaption>
                     </figure>
                 </div>
                 
                 <div class="slide">
                     <figure>
                         <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (4).jpeg" alt="Piccolo Miracolo Candela">
-                        <figcaption>Piccolo Miracolo <strong>7€</strong></figcaption>
+                        <figcaption>Piccolo Miracolo</figcaption>
                     </figure>
                 </div>
                 
                 <div class="slide">
                     <figure>
                         <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (5).jpeg" alt="Margherita a Cono">
-                        <figcaption>Margherita a Cono <strong>6€</strong></figcaption>
+                        <figcaption>Margherita a Cono</figcaption>
                     </figure>
                 </div>
 
                 <div class="slide">
                     <figure>
                         <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (25).jpeg" alt="Teddy con Cuore Candela">
-                        <figcaption>Teddy con Cuore <strong>7€</strong></figcaption>
+                        <figcaption>Teddy con Cuore</figcaption>
                     </figure>
                 </div>
 
                 <div class="slide">
                     <figure>
                         <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.13.jpeg" alt="Tris di Zucche Autunnali">
-                        <figcaption>Tris di Zucche <strong>10€</strong></figcaption>
+                        <figcaption>Tris di Zucche</figcaption>
                     </figure>
                 </div>
 
                 <div class="slide">
                     <figure>
                         <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (34).jpeg" alt="Zucca e Magia Candela">
-                        <figcaption>Zucca e Magia <strong>15€</strong></figcaption>
+                        <figcaption>Zucca e Magia</figcaption>
                     </figure>
                 </div>
                 
                 <div class="slide">
                     <figure>
                         <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (2).jpeg" alt="Incanto d'Autunno">
-                        <figcaption>Incanto d'Autunno <strong>25€</strong></figcaption>
+                        <figcaption>Incanto d'Autunno</figcaption>
                     </figure>
                 </div>
                 
@@ -223,7 +217,7 @@
             <button class="nav-btn next" onclick="changeSlide(1)">&#10095;</button>
 
         </div>
-        </main>
+    </main>
 
     <footer>
         <span>© <span id="year"></span> Candle Studio Eli | Tutti i diritti riservati</span>
@@ -243,22 +237,20 @@
         const autoplayInterval = 4000; 
         
         let slideInterval; 
-        let isAutoplaying = true; // Stato iniziale: Autoplay attivo
+        let isAutoplaying = true;
 
-        // 1. Funzione per spostare il carosello
+        // 1. Sposta il carosello
         function showSlide() {
             const offset = -currentSlide * 100; 
             track.style.transform = `translateX(${offset}%)`;
         }
 
-        // 2. Funzione per cambiare slide (manuale)
+        // 2. Cambia slide (manuale)
         window.changeSlide = function(direction) {
-            // Metti in pausa l'autoplay temporaneamente per evitare salti
             pauseAutoplay();
             
             currentSlide += direction;
 
-            // Logica di Loop: torna alla prima se superi l'ultima e viceversa
             if (currentSlide >= slideCount) {
                 currentSlide = 0;
             }
@@ -268,13 +260,12 @@
 
             showSlide();
 
-            // Dopo l'interazione manuale, riavvia l'autoplay solo se lo stato era 'attivo'
             if (isAutoplaying) {
                 startAutoplay();
             }
         };
 
-        // 3. Funzione per avviare l'Autoplay
+        // 3. Avvia l'Autoplay
         function startAutoplay() {
             if (!slideInterval) {
                 slideInterval = setInterval(() => {
@@ -283,13 +274,13 @@
             }
         }
 
-        // 4. Funzione per fermare l'Autoplay
+        // 4. Ferma l'Autoplay
         function pauseAutoplay() {
             clearInterval(slideInterval);
             slideInterval = null;
         }
         
-        // 5. Funzione per Toggolare (Pausa/Riparti) tramite il pulsante
+        // 5. Toggla (Pausa/Riparti) tramite il pulsante
         window.toggleAutoplay = function() {
             if (isAutoplaying) {
                 pauseAutoplay();
@@ -302,13 +293,11 @@
             }
         };
 
-        // 6. Avvio e interazione (gestione mouse-hover)
+        // 6. Avvio e gestione mouse-hover
         startAutoplay();
         
         const slider = document.getElementById('imageSlider');
-        // Pausa l'autoplay quando il mouse entra, solo se l'autoplay era attivo
         slider.addEventListener('mouseenter', pauseAutoplay);
-        // Riavvia quando il mouse esce, solo se l'autoplay era attivo
         slider.addEventListener('mouseleave', () => {
             if (isAutoplaying) {
                 startAutoplay();
