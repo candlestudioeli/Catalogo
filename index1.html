@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carosello Immagini GitHub</title>
+    <title>Carosello Immagini GitHub (Riempimento Totale)</title>
     
     <style>
         /* ------------------------------------- */
@@ -45,13 +45,13 @@
         /* Contenitore Carosello */
         .carousel-container {
             position: relative;
-            max-width: 90vw; /* Larghezza massima viewport */
-            height: 70vh;    /* Altezza massima per adattarsi alla pagina */
-            margin: 80px auto 100px; /* Spazio per header e footer */
+            max-width: 90vw; 
+            height: 80vh;    /* Aumentato l'altezza per far risaltare il riempimento */
+            margin: 70px auto 60px; /* Spazio per header e footer */
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             border-radius: 8px;
-            background-color: #fff;
+            background-color: #000; /* Sfondo nero per le transizioni */
         }
 
         /* Traccia delle Immagini */
@@ -61,66 +61,74 @@
             height: 100%;
         }
 
-        /* Stile Immagine (Adattamento Pagina) */
+        /* Stile Immagine (Riempimento Totale) */
         .carousel-slide {
-            min-width: 100%; /* Ogni slide occupa tutta la larghezza del contenitore */
+            min-width: 100%; 
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-shrink: 0; /* Impedisce la riduzione della larghezza */
+            flex-shrink: 0; 
         }
 
         .carousel-slide img {
-            /* Proprietà chiave per l'adattamento */
+            /* NUOVO: Riempie completamente il carosello, tagliando i bordi se necessario */
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Adatta l'immagine mantenendo le proporzioni */
+            object-fit: cover; 
             display: block;
         }
 
         /* Frecce e Pulsante di Controllo */
         .arrow, .toggle-btn {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            z-index: 10;
             background: rgba(0, 0, 0, 0.5);
             color: white;
             border: none;
-            padding: 15px;
             cursor: pointer;
-            z-index: 10;
-            font-size: 24px;
             opacity: 0.8;
-            transition: opacity 0.3s;
-            border-radius: 4px;
+            transition: opacity 0.3s, background 0.3s;
         }
 
         .arrow:hover, .toggle-btn:hover {
             opacity: 1;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        /* Frecce */
+        .arrow {
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 15px;
+            font-size: 24px;
+            border-radius: 4px;
         }
 
         .prev { left: 10px; }
         .next { right: 10px; }
 
+        /* Pulsante Stop/Play (Sempre Visibile) */
         .toggle-btn {
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 10px 15px;
+            /* Posiziona il pulsante Stop/Play in alto a destra, SEMPRE visibile */
+            top: 10px;
+            right: 10px;
+            padding: 8px 12px;
             font-size: 18px;
-            /* Posiziona il pulsante Stop/Play sotto il carosello */
-            top: calc(100% + 40px); 
-            border-radius: 50px;
+            border-radius: 4px;
+            /* Rende il pulsante più visibile */
+            background-color: #007bff; 
+            opacity: 1;
         }
     </style>
 </head>
 <body>
 
     <header class="header">
-        <div class="logo-container">
-            <img src="Gemini_Generated_Image_df10mzdf10mzdf10.png" alt="Logo Aziendale">
-       </div>
-        </header>
+        <div class="logo">
+            <h1>🖼️ Galleria Fotografica GitHub</h1>
+        </div>
+    </header>
 
     <div class="carousel-container">
         
@@ -135,7 +143,7 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; <span id="currentYear"></span> Candle Studio Eli </p>
+        <p>&copy; <span id="currentYear"></span> Il Tuo Nome. Tutti i diritti riservati.</p>
     </footer>
 
     <script>
@@ -251,7 +259,7 @@
             // Aggiungi qui tutti i nomi dei tuoi file...
         ];
         
-        const imageDir = 'WhatsApp Unknown 2025-10-22 at 12.32.10/'; // La cartella sul tuo repo GitHub
+        const imageDir = 'WhatsApp Unknown 2025-10-22 at 12.32.10/'; 
         const carouselTrack = document.getElementById('carouselTrack');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
@@ -262,13 +270,12 @@
         let currentIndex = 0;
         let autoplayInterval;
         let isPlaying = true;
-        const autoplayDelay = 5000; // 3 secondi per slide
+        const autoplayDelay = 5000; // 5 secondi per slide
 
         // 1. Caricamento Immagini
         function loadImages() {
             if (imageFiles.length === 0) {
-                // Messaggio di errore se l'array è vuoto
-                carouselTrack.innerHTML = '<div style="text-align:center; padding-top: 30vh; font-size: 1.2em;">Attenzione: L\'array "imageFiles" è vuoto o non contiene i nomi corretti.</div>';
+                carouselTrack.innerHTML = '<div style="text-align:center; padding-top: 30vh; font-size: 1.2em; color: white;">Attenzione: Array "imageFiles" vuoto o nomi non corretti.</div>';
                 prevBtn.style.display = 'none';
                 nextBtn.style.display = 'none';
                 toggleAutoplayBtn.style.display = 'none';
@@ -290,7 +297,7 @@
 
         // 2. Funzione per spostare il carosello
         function moveToSlide(index) {
-            // Ciclo infinito: torna all'inizio o alla fine
+            // Ciclo infinito
             if (index >= imageFiles.length) {
                 currentIndex = 0;
             } else if (index < 0) {
@@ -306,7 +313,7 @@
 
         // 3. Controllo Autoplay
         function startAutoplay() {
-            if (imageFiles.length <= 1) return; // Non avviare se c'è solo una foto
+            if (imageFiles.length <= 1) return;
             isPlaying = true;
             toggleIcon.innerHTML = '&#9616;&#9616;'; // Icona Pausa
             autoplayInterval = setInterval(() => {
@@ -339,9 +346,8 @@
             }
         });
 
-        // 5. Inizializzazione all'avvio della pagina
+        // 5. Inizializzazione
         document.addEventListener('DOMContentLoaded', () => {
-            // Aggiorna l'anno nel footer
             currentYearSpan.textContent = new Date().getFullYear();
             
             loadImages();
