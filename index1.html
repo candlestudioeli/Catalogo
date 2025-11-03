@@ -3,517 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slider Prodotti - Candle Studio Eli</title>
-    
+    <title>Slider Autoplay Prodotti</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* === CSS: Sfondo e Stile di Base === */
+        /* CSS per lo Stile dello Slider */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: sans-serif;
             margin: 0;
             padding: 0;
-            color: #333;
-            /* NUOVA IMMAGINE DI SFONDO PER L'INTERO BODY */
-            background-image: url('immagini/sfondo_candela.jpg'); /* INSERISCI QUI IL PERCORSO DELLA TUA IMMAGINE */
-            background-size: cover; /* L'immagine copre l'intera area */
-            background-position: center center; /* Centra l'immagine */
-            background-attachment: fixed; /* L'immagine rimane fissa durante lo scroll */
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-
+        
         header {
-            background-color: rgba(255, 255, 255, 0.85); /* Sfondo leggermente trasparente per farlo risaltare */
+            background-color: #FFFFFF;
             padding: 10px 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .logo-container img {
-            height: 90px;
+            height: 80px;
             width: auto;
+            margin: 0;
             display: block;
         }
 
-        /* =================================================== */
-        /* === CSS PER LO SLIDER (CAROUSEL) === */
-        /* =================================================== */
-
+        /* Contenitore principale dello slider */
         .slider-container {
-            width: 90%;
-            max-width: 650px;
-            margin: 40px auto;
             position: relative;
-            overflow: hidden;
-            border: 5px solid #007bff;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            border-radius: 12px;
-            background-color: rgba(255, 255, 255, 0.95); /* Sfondo quasi opaco per lo slider */
-        }
-
-        .slide-track {
-            display: flex;
-            transition: transform 0.6s ease-in-out;
-        }
-
-        .slide {
-            min-width: 100%; 
-            box-sizing: border-box; 
-            text-align: center;
-        }
-
-        .slide figure {
-            margin: 0;
-            padding: 0;
-            background-color: transparent; /* Sfondo della figura trasparente, usa quello dello slider */
+            max-width: 90%; /* Limita la larghezza massima per un look migliore */
             width: 100%;
-            border: none;
-            box-shadow: none;
-            border-radius: 0;
+            margin: 40px auto;
+            overflow: hidden; /* Nasconde le immagini fuori dal viewport */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        /* Area interna che contiene tutte le slide e scorre orizzontalmente */
+        .slider-wrapper {
+            display: flex;
+            /* Larghezza calcolata via JavaScript: 100% * numero di immagini */
+            transition: transform 0.5s ease-in-out; 
+        }
+
+        /* Singola slide (immagine + didascalia) */
+        .slide {
+            flex: 0 0 100%; /* Ogni slide occupa esattamente il 100% del contenitore */
+            width: 100%;
+            height: 70vh; /* **Altezza Fissa adatta alla Pagina (70% dell'altezza del viewport)** */
+            position: relative;
+            text-align: center;
+            background-color: #fff;
             display: flex;
             flex-direction: column;
-        }
-        
-        /* INGRANDIMENTO IMMAGINE DELLO SLIDER */
-        .slide img {
-            width: 100%;
-            height: 550px;
-            object-fit: cover;
-            display: block;
-            border-radius: 0;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Didascalia (Descrizione) */
-        .slide figcaption {
-            padding: 18px;
-            background-color: #007bff;
-            color: white;
-            font-size: 1.3em;
-            font-weight: 500;
-            text-align: center;
+        /* Immagine all'interno della slide */
+        .slide img {
+            width: 100%;
+            height: 100%;
+            /* **CRUCIALE per l'adattabilità** */
+            object-fit: contain; /* L'immagine è contenuta interamente nello spazio, mantenendo le proporzioni */
+            display: block;
+            border-radius: 8px 8px 0 0;
         }
-        
-        /* === CSS: Navigazione Manuale (Frecce) === */
-        .nav-btn {
+
+        /* Didascalia sopra l'immagine (o sotto, a seconda del design) */
+        .slide figcaption {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 0;
+            font-size: 1.2em;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        /* Stile dei pulsanti di scorrimento (frecce) */
+        .prev, .next {
             cursor: pointer;
             position: absolute;
             top: 50%;
-            transform: translateY(-50%);
             width: auto;
-            padding: 12px 18px;
+            padding: 16px;
+            margin-top: -22px;
             color: white;
-            font-size: 26px;
-            transition: 0.3s ease;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
             user-select: none;
             background-color: rgba(0, 0, 0, 0.4);
-            border: none;
             z-index: 10;
         }
 
-        .prev { left: 0; border-radius: 0 4px 4px 0; }
-        .next { right: 0; border-radius: 4px 0 0 4px; }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
 
-        .nav-btn:hover { background-color: rgba(0, 0, 0, 0.7); }
-        
-        /* === CSS: Tasto Pausa === */
-        .pause-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 20;
-            padding: 8px 15px;
-            background-color: rgba(255, 255, 255, 0.7);
-            color: #333;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Controlli (Play/Stop) */
+        .slider-controls {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #toggle-autoplay {
+            padding: 10px 20px;
+            font-size: 1em;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
             transition: background-color 0.3s;
         }
 
-        .pause-btn:hover {
-            background-color: rgba(255, 255, 255, 0.9);
+        #toggle-autoplay:hover {
+            background-color: #0056b3;
         }
 
-        /* === CSS: Footer === */
         footer {
-            background-color: rgba(255, 255, 255, 0.85); /* Sfondo leggermente trasparente */
-            color: #333;
+            background-color: #FFFFFF;
+            color: black;
             text-align: center;
-            padding: 20px 0;
+            padding: 15px 0;
             font-size: 0.9em;
+            margin-top: auto;
             border-top: 1px solid #ddd;
-            margin-top: 40px;
         }
     </style>
 </head>
 <body>
     <header>
         <div class="logo-container">
-            <img src="immagini/Gemini_Generated_Image_df10mzdf10mzdf10.png" alt="Candle Studio Eli Logo">
+            <img src="Gemini_Generated_Image_df10mzdf10mzdf10.png" alt="Logo Aziendale">
         </div>
+        <h1>Slider Prodotti</h1>
     </header>
 
-    <main>
+    <main class="slider-container">
+        <div class="slider-wrapper" id="sliderWrapper">
+            <figure class="slide">
+                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 13.19.36 (1).jpeg" alt="Bomboniere">
+                <figcaption>Bomboniera Leoncino 10€</figcaption>
+            </figure>
+            <figure class="slide">
+                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (4).jpeg" alt="Bomboniere">
+                <figcaption>Piccolo Miracolo 7€</figcaption>
+            </figure>
+            <figure class="slide">
+                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.13.jpeg" alt="Autunno">
+                <figcaption>Tris di Zucche 10€</figcaption>
+            </figure>
+            <figure class="slide">
+                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (34).jpeg" alt="Autunno">
+                <figcaption>Zucca e Magia 15€</figcaption>
+            </figure>
+            <figure class="slide">
+                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (41).jpeg" alt="Bouquet">
+                <figcaption>Bouquet Small 30€</figcaption>
+            </figure>
+            <figure class="slide">
+                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (30).jpeg" alt="Natale">
+                <figcaption>Santa Candle 10€</figcaption>
+            </figure>
+            <figure class="slide">
+                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (34).jpeg" alt="Candele Profumate">
+                <figcaption>Girasole 4€</figcaption>
+            </figure>
+            <figure class="slide">
+                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/IMG_4347.jpeg" alt="Natale">
+                <figcaption>Incanto di Natale 15€</figcaption>
+            </figure>
+            
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </main>
+    
+    <div class="slider-controls">
+        <button id="toggle-autoplay" onclick="toggleAutoplay()">
+            <i class="fas fa-pause"></i> Ferma Autoplay
+        </button>
+    </div>
+
+    <footer>
+        <span>© <span id="year"></span> Candle Studio Eli </span>
+    </footer>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
         
-        <div class="slider-container" id="imageSlider">
+        // ************************************************* //
+        // ********* FUNZIONALITÀ SLIDER JAVASCRIPT ******* //
+        // ************************************************* //
+
+        let slideIndex = 0; // Indice della slide corrente (inizia da 0)
+        let slideInterval;  // Variabile per l'intervallo di autoplay
+        let isAutoplayRunning = true; // Stato dell'autoplay
+        const slideWrapper = document.getElementById('sliderWrapper');
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const toggleButton = document.getElementById('toggle-autoplay');
+        const AUTOPLAY_TIME = 4000; // 4 secondi
+
+        // 1. Funzione per mostrare la slide corretta
+        function showSlides(n) {
+            // Calcola l'indice per il wrapping (ciclo infinito)
+            slideIndex = (n + totalSlides) % totalSlides;
             
-            <button class="pause-btn" id="pauseButton" onclick="toggleAutoplay()">PAUSA</button>
+            // Applica la trasformazione per scorrere
+            const offset = -slideIndex * 100;
+            slideWrapper.style.transform = `translateX(${offset}%)`;
+        }
 
-            <button class="nav-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+        // 2. Funzione per lo scorrimento manuale (frecce)
+        function plusSlides(n) {
+            // Interrompe l'autoplay temporaneamente ad ogni scorrimento manuale
+            // (Molti utenti si aspettano questo comportamento)
+            if (isAutoplayRunning) {
+                stopAutoplay();
+                startAutoplay(); // Riavvia subito
+            }
+            showSlides(slideIndex + n);
+        }
+
+        // 3. Funzione per avviare l'autoplay
+        function startAutoplay() {
+            if (isAutoplayRunning) return; // Evita di avviare intervalli multipli
             
-            <div class="slide-track">
-                
-                <div class="slide">
-                    <figure> 
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 13.19.36 (1).jpeg" alt="Bomboniere Leoncino">
-                        <figcaption>Bomboniera Leoncino</figcaption>
-                    </figure>
-                </div>
-                
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (4).jpeg" alt="Piccolo Miracolo Candela">
-                        <figcaption>Piccolo Miracolo</figcaption>
-                    </figure>
-                </div>
-                
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (5).jpeg" alt="Margherita a Cono">
-                        <figcaption>Margherita a Cono</figcaption>
-                    </figure>
-                </div>
+            slideInterval = setInterval(() => {
+                showSlides(slideIndex + 1);
+            }, AUTOPLAY_TIME); // Impostato a 4 secondi
 
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (25).jpeg" alt="Teddy con Cuore Candela">
-                        <figcaption>Teddy con Cuore</figcaption>
-                    </figure>
-                </div>
+            isAutoplayRunning = true;
+            toggleButton.innerHTML = '<i class="fas fa-pause"></i> Ferma Autoplay';
+            toggleButton.style.backgroundColor = '#dc3545'; // Rosso
+        }
 
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.13.jpeg" alt="Tris di Zucche Autunnali">
-                        <figcaption>Tris di Zucche</figcaption>
-                    </figure>
-                </div>
+        // 4. Funzione per interrompere l'autoplay
+        function stopAutoplay() {
+            clearInterval(slideInterval);
+            isAutoplayRunning = false;
+            toggleButton.innerHTML = '<i class="fas fa-play"></i> Avvia Autoplay';
+            toggleButton.style.backgroundColor = '#28a745'; // Verde
+        }
 
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (34).jpeg" alt="Zucca e Magia Candela">
-                        <figcaption>Zucca e Magia</figcaption>
-                    </figure>
-                </div>
-                
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (2).jpeg" alt="Incanto d'Autunno">
-                        <figcaption>Incanto d'Autunno</figcaption>
-                    </figure>
-                </div>
-                
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (27).jpeg" alt="Zucca">
-                        <figcaption>Zucca</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (37).jpeg" alt="Zucca Incantata">
-                        <figcaption>Zucca Incantata</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (4).jpeg" alt="Riccio">
-                        <figcaption>Riccio</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (22).jpeg" alt="Pumpkin Spice">
-                        <figcaption>Pumpkin Spice</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (13).jpeg" alt="Intreccio Sposi">
-                        <figcaption>Intreccio Sposi</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (14).jpeg" alt="Cuore Astratto">
-                        <figcaption>Cuore Astratto</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (19).jpeg" alt="Freschezza Mattutina">
-                        <figcaption>Freschezza Mattutina</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (20).jpeg" alt="Lettere in Cera">
-                        <figcaption>Lettere in Cera</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (1).jpeg" alt="Fiore di Cristallo">
-                        <figcaption>Fiore di Cristallo</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (18).jpeg" alt="Fiore di Cristallo con Coperchio">
-                        <figcaption>Fiore di Cristallo con Coperchio</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (32).jpeg" alt="Leo">
-                        <figcaption>Leo</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (33).jpeg" alt="Tulipani in Vaso">
-                        <figcaption>Tulipani in Vaso</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (35).jpeg" alt="Fiore Incantato">
-                        <figcaption>Fiore Incantato</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (36).jpeg" alt="Fiore di Cristallo Doppio">
-                        <figcaption>Fiore di Cristallo Doppio</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (1).jpeg" alt="Gesto d'Amore">
-                        <figcaption>Gesto d'Amore</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (18).jpeg" alt="Petali di Luce">
-                        <figcaption>Petali di Luce</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15.jpeg" alt="Sospiro di Rosa">
-                        <figcaption>Sospiro di Rosa</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (2).jpeg" alt="Sospiro di Peonia">
-                        <figcaption>Sospiro di Peonia</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (3).jpeg" alt="Campo di Tulipani">
-                        <figcaption>Campo di Tulipani</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (38).jpeg" alt="Bouquet Cerimonia">
-                        <figcaption>Bouquet Cerimonia</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (39).jpeg" alt="Bouquet Large">
-                        <figcaption>Bouquet Large</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (15).jpeg" alt="Mini Bouquet">
-                        <figcaption>Mini Bouquet</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (40).jpeg" alt="Bouquet Large">
-                        <figcaption>Bouquet Large</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (41).jpeg" alt="Bouquet Small">
-                        <figcaption>Bouquet Small</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (42).jpeg" alt="Bouquet Medium">
-                        <figcaption>Bouquet Medium</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.16.jpeg" alt="Bouquet Medium">
-                        <figcaption>Bouquet Medium</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.16 (1).jpeg" alt="Bouquet Medium">
-                        <figcaption>Bouquet Medium</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.16 (2).jpeg" alt="Bouquet Girasoli/Margherite/Tulipani">
-                        <figcaption>Bouquet Girasoli/Margherite/Tulipani</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.13 (3).jpeg" alt="Leoncino">
-                        <figcaption>Leoncino</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.13 (4).jpeg" alt="Teddy con Fiocco">
-                        <figcaption>Teddy con Fiocco</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (3).jpeg" alt="Margherita">
-                        <figcaption>Margherita</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (7).jpeg" alt="Fior di Cera">
-                        <figcaption>Fior di Cera</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (8).jpeg" alt="Rosa Piccola">
-                        <figcaption>Rosa Piccola</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (9).jpeg" alt="Rosa Grande">
-                        <figcaption>Rosa Grande</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (10).jpeg" alt="Sweet Dog">
-                        <figcaption>Sweet Dog</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (11).jpeg" alt="Zampa">
-                        <figcaption>Zampa</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.14 (12).jpeg" alt="Vortice">
-                        <figcaption>Vortice</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (13).jpeg" alt="Rosa a Cuore">
-                        <figcaption>Rosa a Cuore</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (14).jpeg" alt="Petali d'Amore">
-                        <figcaption>Petali d'Amore</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (15).jpeg" alt="Tulipano">
-                        <figcaption>Tulipano</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (16).jpeg" alt="Farfalla">
-                        <figcaption>Farfalla</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (17).jpeg" alt="Elefantino">
-                        <figcaption>Elefantino</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (21).jpeg" alt="Gomitolo">
-                        <figcaption>Gomitolo</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (23).jpeg" alt="Dolce Incanto">
-                        <figcaption>Dolce Incanto</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (25).jpeg" alt="Intreccio di Luce">
-                        <figcaption>Intreccio di Luce</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (26).jpeg" alt="Cuore con Fiocco">
-                        <figcaption>Cuore con Fiocco</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (27).jpeg" alt="Coppia Sposi">
-                        <figcaption>Coppia Sposi</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (28).jpeg" alt="Orsetto Baby">
-                        <figcaption>Orsetto Baby</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (29).jpeg" alt="Teddy con Peluche">
-                        <figcaption>Teddy con Peluche</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img src="immagini/WhatsApp Image 2025-10-22 at 11.33.15 (30).jpeg" alt="Orsetto">
-                        <figcaption>Orsetto</figcaption>
-                    </figure>
-                </div>
-                <div class="slide">
-                    <figure>
-                        <img
+        // 5. Funzione per togglare (avvia/ferma) l'autoplay
+        function toggleAutoplay() {
+            if (isAutoplayRunning) {
+                stopAutoplay();
+            } else {
+                startAutoplay();
+            }
+        }
+        
+        // Inizializzazione: avvia la prima slide e l'autoplay
+        showSlides(slideIndex);
+        startAutoplay(); // L'autoplay è attivo di default all'apertura
+    </script>
+</body>
+</html>
