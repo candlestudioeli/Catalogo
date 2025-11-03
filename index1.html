@@ -17,29 +17,35 @@
             min-height: 100vh;
         }
         
+        /* ⬇️ HEADER RIDOTTO ⬇️ */
         header {
             background-color: #FFFFFF;
-            padding: 10px 20px;
+            padding: 5px 10px; /* Ridotto */
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Ombra più leggera */
         }
 
         .logo-container img {
-            height: 80px;
+            height: 50px; /* Ridotto */
             width: auto;
-            margin: 0;
+            margin: 0 10px 0 0; /* Spazio a destra del logo */
             display: block;
+        }
+        
+        header h1 {
+            font-size: 1.5em; /* Dimensione del titolo ridotta */
+            margin: 0;
         }
 
         /* Contenitore principale dello slider */
         .slider-container {
             position: relative;
-            max-width: 90%; /* Limita la larghezza massima per un look migliore */
+            max-width: 90%; 
             width: 100%;
             margin: 40px auto;
-            overflow: hidden; /* Nasconde le immagini fuori dal viewport */
+            overflow: hidden; 
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             border-radius: 8px;
         }
@@ -47,15 +53,14 @@
         /* Area interna che contiene tutte le slide e scorre orizzontalmente */
         .slider-wrapper {
             display: flex;
-            /* Larghezza calcolata via JavaScript: 100% * numero di immagini */
             transition: transform 0.5s ease-in-out; 
         }
 
         /* Singola slide (immagine + didascalia) */
         .slide {
-            flex: 0 0 100%; /* Ogni slide occupa esattamente il 100% del contenitore */
+            flex: 0 0 100%; 
             width: 100%;
-            height: 70vh; /* **Altezza Fissa adatta alla Pagina (70% dell'altezza del viewport)** */
+            height: 70vh; /* Altezza adattiva */
             position: relative;
             text-align: center;
             background-color: #fff;
@@ -65,25 +70,24 @@
             align-items: center;
         }
 
-        /* Immagine all'interno della slide */
+        /* Immagine all'interno della slide: adattamento automatico */
         .slide img {
             width: 100%;
             height: 100%;
-            /* **CRUCIALE per l'adattabilità** */
-            object-fit: contain; /* L'immagine è contenuta interamente nello spazio, mantenendo le proporzioni */
+            object-fit: contain; /* L'immagine si adatta senza tagli */
             display: block;
             border-radius: 8px 8px 0 0;
         }
 
-        /* Didascalia sopra l'immagine (o sotto, a seconda del design) */
+        /* Didascalia sotto l'immagine */
         .slide figcaption {
             position: absolute;
             bottom: 0;
             width: 100%;
             background-color: rgba(0, 0, 0, 0.6);
             color: white;
-            padding: 10px 0;
-            font-size: 1.2em;
+            padding: 8px 0; /* Padding ridotto */
+            font-size: 1em; /* Dimensione testo ridotta */
             text-shadow: 1px 1px 2px black;
         }
 
@@ -93,11 +97,11 @@
             position: absolute;
             top: 50%;
             width: auto;
-            padding: 16px;
+            padding: 16px 12px; /* Padding frecce leggermente ridotto */
             margin-top: -22px;
             color: white;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 18px; /* Dimensione frecce ridotta */
             transition: 0.6s ease;
             border-radius: 0 3px 3px 0;
             user-select: none;
@@ -118,11 +122,12 @@
         .slider-controls {
             text-align: center;
             margin-top: 10px;
+            margin-bottom: 20px;
         }
 
         #toggle-autoplay {
-            padding: 10px 20px;
-            font-size: 1em;
+            padding: 8px 15px; /* Padding pulsante ridotto */
+            font-size: 0.9em; /* Dimensione testo pulsante ridotta */
             cursor: pointer;
             background-color: #007bff;
             color: white;
@@ -135,12 +140,13 @@
             background-color: #0056b3;
         }
 
+        /* ⬇️ FOOTER RIDOTTO ⬇️ */
         footer {
             background-color: #FFFFFF;
             color: black;
             text-align: center;
-            padding: 15px 0;
-            font-size: 0.9em;
+            padding: 10px 0; /* Padding ridotto */
+            font-size: 0.8em; /* Dimensione testo ridotta */
             margin-top: auto;
             border-top: 1px solid #ddd;
         }
@@ -149,131 +155,4 @@
 <body>
     <header>
         <div class="logo-container">
-            <img src="Gemini_Generated_Image_df10mzdf10mzdf10.png" alt="Logo Aziendale">
-        </div>
-        <h1>Slider Prodotti</h1>
-    </header>
-
-    <main class="slider-container">
-        <div class="slider-wrapper" id="sliderWrapper">
-            <figure class="slide">
-                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 13.19.36 (1).jpeg" alt="Bomboniere">
-                <figcaption>Bomboniera Leoncino 10€</figcaption>
-            </figure>
-            <figure class="slide">
-                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (4).jpeg" alt="Bomboniere">
-                <figcaption>Piccolo Miracolo 7€</figcaption>
-            </figure>
-            <figure class="slide">
-                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.13.jpeg" alt="Autunno">
-                <figcaption>Tris di Zucche 10€</figcaption>
-            </figure>
-            <figure class="slide">
-                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (34).jpeg" alt="Autunno">
-                <figcaption>Zucca e Magia 15€</figcaption>
-            </figure>
-            <figure class="slide">
-                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (41).jpeg" alt="Bouquet">
-                <figcaption>Bouquet Small 30€</figcaption>
-            </figure>
-            <figure class="slide">
-                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.14 (30).jpeg" alt="Natale">
-                <figcaption>Santa Candle 10€</figcaption>
-            </figure>
-            <figure class="slide">
-                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/WhatsApp Image 2025-10-22 at 11.33.15 (34).jpeg" alt="Candele Profumate">
-                <figcaption>Girasole 4€</figcaption>
-            </figure>
-            <figure class="slide">
-                <img src="WhatsApp Unknown 2025-10-22 at 12.32.10/IMG_4347.jpeg" alt="Natale">
-                <figcaption>Incanto di Natale 15€</figcaption>
-            </figure>
-            
-        </div>
-
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-    </main>
-    
-    <div class="slider-controls">
-        <button id="toggle-autoplay" onclick="toggleAutoplay()">
-            <i class="fas fa-pause"></i> Ferma Autoplay
-        </button>
-    </div>
-
-    <footer>
-        <span>© <span id="year"></span> Candle Studio Eli </span>
-    </footer>
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-        
-        // ************************************************* //
-        // ********* FUNZIONALITÀ SLIDER JAVASCRIPT ******* //
-        // ************************************************* //
-
-        let slideIndex = 0; // Indice della slide corrente (inizia da 0)
-        let slideInterval;  // Variabile per l'intervallo di autoplay
-        let isAutoplayRunning = true; // Stato dell'autoplay
-        const slideWrapper = document.getElementById('sliderWrapper');
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        const toggleButton = document.getElementById('toggle-autoplay');
-        const AUTOPLAY_TIME = 4000; // 4 secondi
-
-        // 1. Funzione per mostrare la slide corretta
-        function showSlides(n) {
-            // Calcola l'indice per il wrapping (ciclo infinito)
-            slideIndex = (n + totalSlides) % totalSlides;
-            
-            // Applica la trasformazione per scorrere
-            const offset = -slideIndex * 100;
-            slideWrapper.style.transform = `translateX(${offset}%)`;
-        }
-
-        // 2. Funzione per lo scorrimento manuale (frecce)
-        function plusSlides(n) {
-            // Interrompe l'autoplay temporaneamente ad ogni scorrimento manuale
-            // (Molti utenti si aspettano questo comportamento)
-            if (isAutoplayRunning) {
-                stopAutoplay();
-                startAutoplay(); // Riavvia subito
-            }
-            showSlides(slideIndex + n);
-        }
-
-        // 3. Funzione per avviare l'autoplay
-        function startAutoplay() {
-            if (isAutoplayRunning) return; // Evita di avviare intervalli multipli
-            
-            slideInterval = setInterval(() => {
-                showSlides(slideIndex + 1);
-            }, AUTOPLAY_TIME); // Impostato a 4 secondi
-
-            isAutoplayRunning = true;
-            toggleButton.innerHTML = '<i class="fas fa-pause"></i> Ferma Autoplay';
-            toggleButton.style.backgroundColor = '#dc3545'; // Rosso
-        }
-
-        // 4. Funzione per interrompere l'autoplay
-        function stopAutoplay() {
-            clearInterval(slideInterval);
-            isAutoplayRunning = false;
-            toggleButton.innerHTML = '<i class="fas fa-play"></i> Avvia Autoplay';
-            toggleButton.style.backgroundColor = '#28a745'; // Verde
-        }
-
-        // 5. Funzione per togglare (avvia/ferma) l'autoplay
-        function toggleAutoplay() {
-            if (isAutoplayRunning) {
-                stopAutoplay();
-            } else {
-                startAutoplay();
-            }
-        }
-        
-        // Inizializzazione: avvia la prima slide e l'autoplay
-        showSlides(slideIndex);
-        startAutoplay(); // L'autoplay è attivo di default all'apertura
-    </script>
-</body>
-</html>
+            <img src="Gemini_Generated_Image_df10mzdf10mzdf10.png" alt
